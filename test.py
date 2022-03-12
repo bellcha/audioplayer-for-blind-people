@@ -1,6 +1,7 @@
+from eyed3 import id3
 
-PATH = '/var/lib/mpd/music'
+tag = id3.Tag()
 
-path = '/var/lib/mpd/music/.meta/a-ah_tts.mp3'
+tag.parse("/Users/bellcha/Music/08_Colt_45.mp3")
 
-print(path[len(PATH) + 1:])
+print(tag.title)
