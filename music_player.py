@@ -11,13 +11,13 @@ class MusicPlayer:
         self.client.clear()
         try:
             print (f'playing {path}')
-            client.add(path[len(PATH) + 1:])
-            client.play()
+            self.client.add(path[len(PATH) + 1:])
+            self.client.client.play()
         except CommandError as e:
             print (e)
 
     def maybe_set_bookmark(self):
-        elapsed = int(float(client.status().get('elapsed', "0")))
+        elapsed = int(float(self.client.status().get('elapsed', "0")))
         index = self.file.parent.entries().index(self.file)
         if elapsed > 30:
             print (f'creating bookmark at {index}-{elapsed}')
@@ -48,7 +48,7 @@ class MusicPlayer:
         os.system('mpc seek -00:01:00')
 
     def handle_tick(self):
-        if client.status()['state'] == 'stop':
+        if self.client.status()['state'] == 'stop':
             return self.handle_stopped()
 
     def handle_bookmark(self):
